@@ -4,8 +4,10 @@
   <meta charset="UTF-8">
   <title>Nuestra Boda — Luis y Rossy</title>
 
-  <!-- Tipografías similares a Canva -->
-  <link href="https://googleapis.com" rel="stylesheet">
+  <!-- Tipografías similares a Canva corregidas -->
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
@@ -164,24 +166,6 @@
     .event-cards { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; margin-top: 18px; }
     .card { background: var(--card); padding: 18px; border-radius: 12px; box-shadow: 0 8px 20px rgba(33,33,33,0.06); min-width: 220px; }
 
-    /* COUNTDOWN */
-    .countdown-box { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
-    .countdown-item {
-      background: linear-gradient(180deg,#fff,#fff);
-      padding: 14px 20px; border-radius: 12px; min-width: 110px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-    }
-    .countdown-item h3 { margin: 0; font-size: 1.8rem; color: var(--accent); font-family: 'Playfair Display', serif; }
-    .countdown-item p { margin: 6px 0 0 0; color: var(--muted); font-size: .9rem; }
-
-    /* MAP */
-    #map { width: 100%; height: 420px; border-radius: 12px; border: 0; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-    .map-info { background: #fff; padding: 18px; border-radius: 12px; max-width: 720px; margin: 18px auto; box-shadow: 0 8px 20px rgba(0,0,0,0.05); text-align: left; }
-
-    /* RSVP */
-    .rsvp { display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
-    .mailto { color: var(--accent); font-weight: 600; text-decoration: none; }
-
     footer { background: var(--accent); color: white; padding: 18px; text-align: center; border-radius: 12px; margin: 26px auto 60px; max-width: var(--max-width); }
 
     /* Responsive */
@@ -205,15 +189,15 @@
 
       <div class="hero-cta">
         <a class="btn" href="#detalles">Ver detalles</a>
-        <!-- BOTÓN DE MÚSICA CONFIGURADO -->
-        <button class="btn btn-ghost" onclick="toggleMusic()">
+        <!-- BOTÓN CONECTADO A LA API DE YOUTUBE -->
+        <button class="btn btn-ghost" onclick="toggleYoutubeMusic()">
           <span class="play-overlay" id="playBtn">▶</span>
         </button>
       </div>
     </div>
 
-    <!-- REPRODUCTOR OCULTO: Modifica 'TU_CANCION.mp3' por el archivo que tengas en tu carpeta -->
-   <audio id="music" src="cancion.mp3" loop></audio>
+    <!-- CONTENEDOR OCULTO PARA YOUTUBE (No borrar) -->
+    <div id="yt-player" style="display: none;"></div>
   </header>
 
   <main>
@@ -243,21 +227,21 @@
         <h2 style="font-family: 'Playfair Display', serif;">Fotos</h2>
         <div class="gallery-grid">
           <a class="gallery-item" href="BODA/Boda1.jpeg">
-            <img src="BODA/Boda1.jpeg" alt="Foto 1" loading="lazy" width="800" height="600">
+            <img src="BODA/photo1.jpg" alt="Foto 1" loading="lazy" width="800" height="600">
           </a>
           <a class="gallery-item" href="BODA/Boda2.jpeg">
-            <img src="BODA/Boda2.jpeg" alt="Foto 2" loading="lazy" width="800" height="600">
+            <img src="BODA/photo2.jpg" alt="Foto 2" loading="lazy" width="800" height="600">
           </a>
           <a class="gallery-item" href="BODA/Boda3.jpeg">
-            <img src="BODA/Boda3.jpeg" alt="Foto 3" loading="lazy" width="800" height="600">
+            <img src="BODA/photo3.jpg" alt="Foto 3" loading="lazy" width="800" height="600">
           </a>
           <a class="gallery-item" href="BODA/Boda0.jpeg">
-            <img src="BODA/Boda0.jpeg" alt="Foto 4" loading="lazy" width="800" height="600">
+            <img src="BODA/photo4.jpg" alt="Foto 4" loading="lazy" width="800" height="600">
           </a>
         </div>
       </div>
 
-      <!-- Lightbox / modal para ampliar las fotos -->
+      <!-- Lightbox / modal -->
       <div id="lightbox" class="lightbox" aria-hidden="true">
         <button class="lb-close" aria-label="Cerrar">✕</button>
         <img class="lb-img" src="" alt="">
@@ -271,19 +255,38 @@
     <p>¡Te esperamos en nuestra boda!</p>
   </footer>
 
-  <!-- SCRIPT PARA CONTROLAR EL AUDIO -->
-  <script>
-    function toggleMusic() {
-      const music = document.getElementById('music');
-      const playBtn = document.getElementById('playBtn');
+  <!-- LLAMADA A LA API DE IFRAME DE YOUTUBE -->
+  <script src="https://www.youtube.com/iframe_api"></script>
 
-      if (music.paused) {
-        music.play().catch(error => {
-          console.log("El navegador bloqueó la reproducción automática: ", error);
-        });
+  <script>
+    let player;
+
+    // Esta función se activa automáticamente al cargar la API de YouTube
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('yt-player', {
+        height: '0',
+        width: '0',
+        videoId: 'https://www.youtube.com/watch?v=Fu9uBqqOxWk&list=RDFu9uBqqOxWk&start_radio=1', // <--- REEMPLAZA ESTO CON EL ID DE TU VIDEO
+        playerVars: {
+          'autoplay': 0,
+          'controls': 0,
+          'loop': 1,
+          'playlist': 'https://www.youtube.com/watch?v=Fu9uBqqOxWk&list=RDFu9uBqqOxWk&start_radio=1' // Pone el mismo ID aquí para que repita en bucle
+        }
+      });
+    }
+
+    function toggleYoutubeMusic() {
+      const playBtn = document.getElementById('playBtn');
+      
+      // Obtiene el estado actual del reproductor de YouTube
+      const playerState = player.getPlayerState();
+
+      if (playerState !== 1) { // 1 significa que está reproduciendo
+        player.playVideo();
         playBtn.innerText = "⏸";
       } else {
-        music.pause();
+        player.pauseVideo();
         playBtn.innerText = "▶";
       }
     }
