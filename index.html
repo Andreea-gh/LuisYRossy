@@ -403,7 +403,10 @@
             <!-- Botón que abre Google Maps directamente en el Jardín Themis -->
             <a class="btn-mapa" href="https://maps.app.goo.gl/MdJankM3ErYzzZge8" target="_blank">Ver mapa</a>
           </div>
-           <div id="tarjetaPases" class="card" style="max-width: 420px; margin: 0 auto; flex: 1 1 100%; display: none;">
+          
+            <!-- SECCIÓN DE REGALO (SOBRE/TÓMBOLA) -->
+                      <!-- TARJETA DE PASES DINÁMICOS CON MENSAJES Y BOTÓN DE CONFIRMACIÓN -->
+          <div id="tarjetaPases" class="card" style="max-width: 420px; margin: 0 auto; flex: 1 1 100%; display: none;">
             <strong style="font-size: 1.3rem; display: block; margin-bottom: 8px;">🎟️ Tus Pases</strong>
             <div id="nombreInvitado" style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--accent); font-weight: bold; margin-bottom: 8px;">
               ¡Hola!
@@ -427,13 +430,21 @@
             </div>
 
             <!-- SECCIÓN DE PUNTUALIDAD -->
-            <div style="padding: 0 10px; margin-bottom: 10px;">
+            <div style="padding: 0 10px; margin-bottom: 25px;">
               <strong style="font-size: 1.1rem; display: block; margin-bottom: 6px; color: #2b2b2b;">⏰ Puntualidad</strong>
               <p style="font-size: 0.95rem; color: var(--muted); margin: 0; line-height: 1.5;">
                 Queremos que disfrutes cada segundo con nosotros, llega a tiempo para no perderte nada.
               </p>
             </div>
+
+            <!-- BOTÓN DE CONFIRMACIÓN POR WHATSAPP -->
+            <div style="padding: 0 10px; margin-bottom: 10px;">
+              <a id="btnRsvp" class="btn" href="#" target="_blank" style="background-color: #25D366; color: white; width: 100%; text-align: center; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3); font-size: 1.05rem;">
+                Confirmar Asistencia por WhatsApp 💬
+              </a>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -560,7 +571,7 @@
     // =======================================================
     // ¡AQUÍ PEGAS LA NUEVA LÓGICA DE LOS PASES PERSONALIZADOS!
     // =======================================================
-    function cargarPasesPersonalizados() {
+        function cargarPasesPersonalizados() {
       const urlParams = new URLSearchParams(window.location.search);
       const invitado = urlParams.get('invitado');
       const pases = urlParams.get('pases');
@@ -568,13 +579,29 @@
       const tarjeta = document.getElementById('tarjetaPases');
       const txtNombre = document.getElementById('nombreInvitado');
       const txtPases = document.getElementById('numeroPases');
+      const btnRsvp = document.getElementById('btnRsvp');
+
+      // Pon aquí tu número de WhatsApp (Debe incluir código de país, ej: 52 para México)
+      const tuTelefono = "5532385053"; 
 
       if (invitado && pases) {
         if (tarjeta) tarjeta.style.display = 'block';
-        if (txtNombre) txtNombre.innerText = "¡Hola, " + invitado.replace(/\+/g, ' ') + "!";
+        
+        const nombreLimpio = invitado.replace(/\+/g, ' ');
+        if (txtNombre) txtNombre.innerText = "¡Hola, " + nombreLimpio + "!";
         if (txtPases) txtPases.innerText = pases;
+
+        // Armamos el mensaje automático para WhatsApp
+        if (btnRsvp) {
+          const textoMensaje = encodeURIComponent("¡Hola Luis y Rossy! Confirmo nuestra asistencia bajo el nombre de " + nombreLimpio + " para los " + pases + " lugares reservados. ¡Ahí estaremos!");
+          btnRsvp.href = "https://wa.me" + tuTelefono + "?text=" + textoMensaje;
+        }
       }
     }
+
+    // Ejecuta la función automáticamente al cargar el documento
+    window.addEventListener('DOMContentLoaded', cargarPasesPersonalizados);
+
 
     // Ejecuta la función automáticamente en cuanto carga el documento
     window.addEventListener('DOMContentLoaded', cargarPasesPersonalizados);
