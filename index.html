@@ -386,7 +386,19 @@
             <div style="font-size: 0.95rem; color: var(--muted); margin-bottom: 15px; line-height: 1.4;">
               Cruz del Olvido S/N, San Pablo, 56334 Chimalhuacán, Méx.
             </div>
-            
+              <!-- TARJETA DE PASES DINÁMICOS -->
+            <div id="tarjetaPases" class="card" style="max-width: 420px; margin: 0 auto; flex: 1 1 100%; display: none;">
+            <strong style="font-size: 1.3rem; display: block; margin-bottom: 8px;">🎟️ Tus Pases</strong>
+            <div id="nombreInvitado" style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--accent); font-weight: bold; margin-bottom: 8px;">
+              ¡Hola!
+            </div>
+            <div style="font-size: 1.1rem; color: #2b2b2b;">
+              Hemos reservado para ti y tu familia:
+            </div>
+            <div style="font-size: 2.5rem; font-weight: 700; color: var(--accent); margin: 10px 0; font-family: 'Playfair Display', serif;">
+              <span id="numeroPases">0</span> <span style="font-size: 1.5rem; font-weight: 400; color: var(--muted);">lugares</span>
+            </div>
+          </div>
             <!-- Botón que abre Google Maps directamente en el Jardín Themis -->
             <a class="btn-mapa" href="https://maps.app.goo.gl/MdJankM3ErYzzZge8" target="_blank">Ver mapa</a>
           </div>
@@ -406,7 +418,7 @@
             <div class="parents-row">
               <div class="parents-names">
                 <div>Adelfo Hernández</div>
-                <div class="heart-icon">❤️</div>
+                
                 <div>Constanza Mendiola <span class="cross-icon">✝</span></div>
               </div>
               <!-- Reemplaza 'BODA/novia_cadaver.png' por la ruta real de tu imagen -->
@@ -422,7 +434,7 @@
               <img class="parent-photo" src="BODA/novio_victor.png" alt="Victor">
               <div class="parents-names">
                 <div>Herminio Herrera <span class="cross-icon">✝</span></div>
-                <div class="heart-icon">❤️</div>
+                  
                 <div>Maria Magdalena Ramirez</div>
               </div>
             </div>
@@ -465,7 +477,81 @@
   <footer>
     <p>¡Te esperamos en nuestra boda!</p>
   </footer>
+ <script>
+    // 1. Tu función para abrir la invitación
+    function openInvitation() {
+      const overlay = document.getElementById('welcomeOverlay');
+      const music = document.getElementById('music');
+      const playBtn = document.getElementById('playBtn');
+      if (overlay) overlay.classList.add('hidden');
+      if (music) {
+        music.play().catch(error => { console.log(error); });
+        if (playBtn) playBtn.innerText = "⏸";
+      }
+    }
 
+    // 2. Tu función para pausar la música
+    function toggleMusic() {
+      const music = document.getElementById('music');
+      const playBtn = document.getElementById('playBtn');
+      if (!music) return;
+      if (music.paused) {
+        music.play().catch(error => { console.log(error); });
+        playBtn.innerText = "⏸";
+      } else {
+        music.pause();
+        playBtn.innerText = "▶";
+      }
+    }
+
+    // 3. Tu código del Contador de tiempo hacia el 24 de Octubre
+    const targetDate = new Date('October 24, 2026 17:30:00').getTime();
+    const countdownInterval = setInterval(function() {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+      const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((difference % (1000 * 60)) / 1000);
+
+      const daysEl = document.getElementById('days');
+      const hoursEl = document.getElementById('hours');
+      const minutesEl = document.getElementById('minutes');
+      const secondsEl = document.getElementById('seconds');
+
+      if (daysEl) daysEl.innerText = d < 10 ? '0' + d : d;
+      if (hoursEl) hoursEl.innerText = h < 10 ? '0' + h : h;
+      if (minutesEl) minutesEl.innerText = m < 10 ? '0' + m : m;
+      if (secondsEl) secondsEl.innerText = s < 10 ? '0' + s : s;
+    }, 1000);
+
+
+    // =======================================================
+    // ¡AQUÍ PEGAS LA NUEVA LÓGICA DE LOS PASES PERSONALIZADOS!
+    // =======================================================
+    function cargarPasesPersonalizados() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const invitado = urlParams.get('invitado');
+      const pases = urlParams.get('pases');
+
+      const tarjeta = document.getElementById('tarjetaPases');
+      const txtNombre = document.getElementById('nombreInvitado');
+      const txtPases = document.getElementById('numeroPases');
+
+      if (invitado && pases) {
+        if (tarjeta) tarjeta.style.display = 'block';
+        if (txtNombre) txtNombre.innerText = "¡Hola, " + invitado.replace(/\+/g, ' ') + "!";
+        if (txtPases) txtPases.innerText = pases;
+      }
+    }
+
+    // Ejecuta la función automáticamente en cuanto carga el documento
+    window.addEventListener('DOMContentLoaded', cargarPasesPersonalizados);
+    // =======================================================
+
+  </script> <!-- Este es el cierre de la etiqueta script -->
+</body>
+</html>
   <!-- PROGRAMACIÓN DE FUNCIONES (Sgripts que faltaban) -->
   <script>
     function openInvitation() {
