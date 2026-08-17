@@ -485,8 +485,7 @@
       }
     }
 
-    // Función para pausar o reproducir la música manualmente con el botón flotante
-   function toggleMusic() {
+    function toggleMusic() {
       const music = document.getElementById('music');
       const playBtn = document.getElementById('playBtn');
 
@@ -503,6 +502,40 @@
         playBtn.innerText = "▶";
       }
     }
+
+    // === AQUÍ PEGAS LA LÓGICA DEL CONTADOR QUE TE FALTABA ===
+    const targetDate = new Date('October 24, 2026 17:30:00').getTime();
+
+    const countdownInterval = setInterval(function() {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      // Cálculos matemáticos de tiempo
+      const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((difference % (1000 * 60)) / 1000);
+
+      // Inyectar los valores dinámicos en los cuadros correspondientes
+      const daysEl = document.getElementById('days');
+      const hoursEl = document.getElementById('hours');
+      const minutesEl = document.getElementById('minutes');
+      const secondsEl = document.getElementById('seconds');
+
+      if (daysEl) daysEl.innerText = d < 10 ? '0' + d : d;
+      if (hoursEl) hoursEl.innerText = h < 10 ? '0' + h : h;
+      if (minutesEl) minutesEl.innerText = m < 10 ? '0' + m : m;
+      if (secondsEl) secondsEl.innerText = s < 10 ? '0' + s : s;
+
+      // Si llegamos a la fecha del evento, fijar el marcador en ceros
+      if (difference < 0) {
+        clearInterval(countdownInterval);
+        if (daysEl) daysEl.innerText = "00";
+        if (hoursEl) hoursEl.innerText = "00";
+        if (minutesEl) minutesEl.innerText = "00";
+        if (secondsEl) secondsEl.innerText = "00";
+      }
+    }, 1000);
   </script>
 
 </body>
