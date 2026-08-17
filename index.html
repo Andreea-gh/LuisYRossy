@@ -2,202 +2,235 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Nuestra Boda</title>
+  <title>Nuestra Boda — Luis y Rossy</title>
+
+  <!-- Tipografías similares a Canva -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
   <style>
-    body {
-      margin: 0;
-      font-family: 'Georgia', serif;
-      background: #fdf6f0;
-      color: #333;
-      text-align: center;
+    :root{
+      --bg:#fbf7f5;
+      --accent:#d6336c;
+      --muted:#7b6f6b;
+      --card:#ffffff;
+      --hero-overlay: rgba(16,12,10,0.45);
+      --max-width:1100px;
     }
-    header {
-      background: url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80') no-repeat center/cover;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+      background:var(--bg);
+      color:#2b2b2b;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
-    header h1 {
-      font-size: 3em;
-      margin: 0;
+
+    main{max-width:var(--max-width);margin:0 auto;padding:0 20px;}
+
+    /* HERO */
+    header{
+      position:relative;
+      height:78vh;
+      min-height:520px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:white;
+      overflow:hidden;
+      border-bottom-left-radius:24px;
+      border-bottom-right-radius:24px;
+      margin-bottom:30px;
     }
-    header h2 {
-      font-size: 1.5em;
-      margin-top: 10px;
+    header::before{
+      content:"";
+      position:absolute;inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.25));
+      z-index:1;
     }
-    section {
-      padding: 50px 20px;
+    .hero-bg{
+      position:absolute;inset:0;background-position:center;background-size:cover;z-index:0;filter:contrast(0.95) saturate(1.05);
+      transform:scale(1.02);
     }
-    .play-btn {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: #fff;
-      color: #d6336c;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2em;
-      cursor: pointer;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-      transition: transform 0.2s, box-shadow 0.2s;
-      margin: 20px auto;
+
+    .hero-content{position:relative;z-index:2;max-width:900px;padding:40px;}
+    h1{
+      margin:0;
+      font-family: 'Playfair Display', serif;
+      font-weight:700;
+      font-size:4.2rem;
+      letter-spacing:0.02em;
+      line-height:1;
+      text-shadow: 0 6px 18px rgba(0,0,0,0.35);
     }
-    .play-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 12px 20px rgba(0,0,0,0.3);
+    .subtitle{
+      margin-top:12px;
+      font-size:1.25rem;
+      color:rgba(255,255,255,0.95);
+      text-shadow: 0 4px 12px rgba(0,0,0,0.25);
     }
-    .play-btn::before {
-      content: "▶";
+
+    .hero-cta{
+      margin-top:28px;
+      display:flex;
+      gap:16px;
+      justify-content:center;
+      flex-wrap:wrap;
     }
-    
-    /* Estilos para el reloj */
-    .countdown {
-      font-size: 2em;
-      font-weight: bold;
-      color: #d6336c;
-      margin: 30px 0;
-      font-family: 'Courier New', monospace;
+    .btn{
+      background:var(--card);
+      color:var(--accent);
+      padding:12px 20px;
+      border-radius:999px;
+      font-weight:600;
+      box-shadow:0 8px 20px rgba(0,0,0,0.12);
+      border:0;
+      cursor:pointer;
+      transition:transform .18s ease, box-shadow .18s ease;
+      text-decoration:none;
     }
-    
-    .countdown-box {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin: 20px 0;
+    .btn:active{transform:translateY(1px)}
+    .btn-ghost{background:transparent;border:2px solid rgba(255,255,255,0.18);color:white}
+    .play-overlay{
+      width:72px;height:72px;border-radius:50%;background:white;color:var(--accent);display:inline-grid;place-items:center;font-size:1.6rem;
+      box-shadow:0 8px 20px rgba(0,0,0,0.2);cursor:pointer;border:0;
     }
-    
-    .countdown-item {
-      background: white;
-      padding: 15px 25px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+    /* SECCIONES */
+    section{padding:36px 0;}
+    .section-inner{max-width:900px;margin:0 auto;text-align:center;padding:0 16px;}
+
+    .event-cards{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:18px;}
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow: 0 8px 20px rgba(33,33,33,0.06);min-width:220px;}
+
+    /* COUNTDOWN */
+    .countdown-box{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:20px;}
+    .countdown-item{
+      background:linear-gradient(180deg,#fff,#fff);
+      padding:14px 20px;border-radius:12px;min-width:110px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.06);
     }
-    
-    .countdown-item h3 {
-      margin: 0;
-      font-size: 1.5em;
-      color: #d6336c;
+    .countdown-item h3{margin:0;font-size:1.8rem;color:var(--accent);font-family:'Playfair Display',serif}
+    .countdown-item p{margin:6px 0 0 0;color:var(--muted);font-size:.9rem}
+
+    /* MAP */
+    #map{width:100%;height:420px;border-radius:12px;border:0;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.08)}
+    .map-info{background:#fff;padding:18px;border-radius:12px;max-width:720px;margin:18px auto;box-shadow:0 8px 20px rgba(0,0,0,0.05);text-align:left}
+
+    /* RSVP */
+    .rsvp{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:12px}
+    .mailto{color:var(--accent);font-weight:600;text-decoration:none}
+
+    footer{background:var(--accent);color:white;padding:18px;text-align:center;border-radius:12px;margin:26px auto 60px;max-width:var(--max-width);}
+
+    /* Responsive */
+    @media (max-width:860px){
+      h1{font-size:3rem}
+      .hero-bg{background-position:top}
     }
-    
-    .countdown-item p {
-      margin: 5px 0 0 0;
-      font-size: 0.9em;
-      color: #666;
+    @media (max-width:520px){
+      h1{font-size:2.2rem}
+      .play-overlay{width:64px;height:64px}
     }
-    
-    /* Estilos para el mapa */
-    #map {
-      width: 100%;
-      height: 400px;
-      margin: 30px 0;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    
-    .map-info {
-      background: #f5f5f5;
-      padding: 20px;
-      border-radius: 8px;
-      margin: 20px auto;
-      max-width: 600px;
-    }
-    
-    .map-info a {
-      color: #d6336c;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    
-    .map-info a:hover {
-      text-decoration: underline;
-    }
-    
-    footer {
-      background: #d6336c;
-      color: white;
-      padding: 20px;
-    }
+
   </style>
 </head>
 <body>
   <header>
-    <h1>Luis y Rossy</h1>
-    <h2>¡Nos casamos!</h2>
-    <div class="play-btn" onclick="playMusic()"></div>
+    <!-- Reemplaza esta URL por la imagen que exportes de Canva o usa Unsplash -->
+    <div class="hero-bg" style="background-image:url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80');"></div>
+
+    <div class="hero-content">
+      <h1>Luis & Rossy</h1>
+      <div class="subtitle">24 de Octubre, 2026 · Salón Jardines del Sol · 7:30 PM</div>
+
+      <div class="hero-cta">
+        <a class="btn" href="#detalles">Ver detalles</a>
+        <button class="btn btn-ghost" onclick="document.getElementById('music').paused ? playMusic() : playMusic()">
+          <span class="play-overlay" id="playBtn">▶</span>
+        </button>
+      </div>
+    </div>
   </header>
 
-  <section>
-    <h2>Detalles del Evento</h2>
-    <p>📅 24 de Octubre, 2026</p>
-    <p>📍 Salón Jardines del Sol</p>
-    <p>Cruz del Olvido S/N, San Pablo, 56334 Chimalhuacán, Méx.</p>
-    <p>⏰ 7:30 PM</p>
-  </section>
+  <main>
+    <section id="detalles">
+      <div class="section-inner">
+        <h2 style="font-family:'Playfair Display',serif;margin-bottom:6px">Detalles del Evento</h2>
+        <div class="event-cards">
+          <div class="card">
+            <strong>📅 Fecha</strong>
+            <div>24 de Octubre, 2026 · 7:30 PM</div>
+          </div>
+          <div class="card">
+            <strong>📍 Lugar</strong>
+            <div>Salón Jardines del Sol<br>Cruz del Olvido S/N, San Pablo</div>
+          </div>
+          <div class="card">
+            <strong>👗 Vestimenta</strong>
+            <div>Formal · Traje oscuro / Vestido largo</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <!-- RELOJ QUE CUENTA HACIA LA BODA -->
-  <section>
-    <h2>¡Faltan...</h2>
-    <div class="countdown-box">
-      <div class="countdown-item">
-        <h3 id="days">0</h3>
-        <p>Días</p>
+    <section aria-label="Cuenta regresiva">
+      <div class="section-inner">
+        <h2 style="font-family:'Playfair Display',serif">¡Faltan...</h2>
+        <div class="countdown-box" id="countdown">
+          <div class="countdown-item"><h3 id="days">0</h3><p>Días</p></div>
+          <div class="countdown-item"><h3 id="hours">0</h3><p>Horas</p></div>
+          <div class="countdown-item"><h3 id="minutes">0</h3><p>Minutos</p></div>
+          <div class="countdown-item"><h3 id="seconds">0</h3><p>Segundos</p></div>
+        </div>
       </div>
-      <div class="countdown-item">
-        <h3 id="hours">0</h3>
-        <p>Horas</p>
-      </div>
-      <div class="countdown-item">
-        <h3 id="minutes">0</h3>
-        <p>Minutos</p>
-      </div>
-      <div class="countdown-item">
-        <h3 id="seconds">0</h3>
-        <p>Segundos</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- MAPA DE GOOGLE -->
-  <section>
-    <h2>¿Cómo llegar?</h2>
-    <div id="map"></div>
-    <div class="map-info">
-      <p><strong>Salón Jardín Themis</strong></p>
-      <p>Cruz del Olvido S/N, San Pablo, 56334 Chimalhuacán, Méx.</p>
-      <p><a href="https://www.google.com/maps/search/Salón+Jardines+del+Sol+Chimalhuacán+Méx" target="_blank">📍 Abrir en Google Maps</a></p>
-    </div>
-  </section>
+    <section id="mapa">
+      <div class="section-inner">
+        <h2 style="font-family:'Playfair Display',serif">¿Cómo llegar?</h2>
 
-  <section>
-    <h2>Confirma tu asistencia</h2>
-    <p>Por favor confirma antes del 1 de Agosto</p>
-    <p><a href="mailto:correo@ejemplo.com">correo@ejemplo.com</a></p>
-  </section>
+        <!-- Embed de Google Maps sin usar API Key. Cambia las coordenadas si quieres -->
+        <div id="map">
+          <iframe
+            src="https://maps.google.com/maps?q=19.3925,-99.0702&z=15&output=embed"
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+
+        <div class="map-info">
+          <p><strong>Salón Jardines del Sol</strong></p>
+          <p>Cruz del Olvido S/N, San Pablo, 56334 Chimalhuacán, Méx.</p>
+          <p><a class="mailto" href="https://www.google.com/maps/search/Salón+Jardines+del+Sol+Chimalhuacán+Méx" target="_blank">Abrir en Google Maps ↗</a></p>
+        </div>
+      </div>
+    </section>
+
 
   <footer>
-    <p>Con amor, Luis y Rossy💕</p>
+    <p>Con amor, Luis y Rossy ❤️</p>
   </footer>
 
-  <audio id="music" controls>
+  <!-- Reproductor de audio controlado por botón -->
+  <audio id="music" preload="none">
     <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    Tu navegador no soporta reproducción de audio.
   </audio>
 
-  <!-- Google Maps API -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDummyKey"></script>
-
   <script>
-    // FUNCIÓN RELOJ (COUNTDOWN)
+    // COUNTDOWN
     function updateCountdown() {
       const weddingDate = new Date('October 24, 2026 19:30:00').getTime();
-      const now = new Date().getTime();
-      const timeLeft = weddingDate - now;
+      const now = Date.now();
+      let timeLeft = weddingDate - now;
+
+      if (timeLeft <= 0) {
+        document.getElementById('countdown').innerHTML = '<div style="font-family:Playfair Display,serif;font-size:1.6rem;color:var(--accent)">¡Ya es hora!</div>';
+        clearInterval(intervalId);
+        return;
+      }
 
       const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
       const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -205,65 +238,39 @@
       const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
       document.getElementById('days').textContent = days;
-      document.getElementById('hours').textContent = hours;
-      document.getElementById('minutes').textContent = minutes;
-      document.getElementById('seconds').textContent = seconds;
-
-      if (timeLeft < 0) {
-        document.querySelector('.countdown-box').innerHTML = '<h2>¡Ya es hora!</h2>';
-      }
+      document.getElementById('hours').textContent = String(hours).padStart(2,'0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2,'0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2,'0');
     }
-
-    // Actualizar el reloj cada segundo
     updateCountdown();
-    setInterval(updateCountdown, 1000);
+    const intervalId = setInterval(updateCountdown, 1000);
 
-    // FUNCIÓN MAPA DE GOOGLE
-    function initMap() {
-      const locationCoords = { lat: 19.3925, lng: -99.0702 }; // Coordenadas de Chimalhuacán
-      
-      const map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 15,
-        center: locationCoords,
-        styles: [
-          {
-            "featureType": "all",
-            "elementType": "geometry",
-            "stylers": [{ "color": "#f5f5f5" }]
-          }
-        ]
-      });
-
-      // Marcador con el lugar de la boda
-      const marker = new google.maps.Marker({
-        position: locationCoords,
-        map: map,
-        title: 'Salón Jardines del Sol',
-        icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-      });
-
-      // InfoWindow (popup) del marcador
-      const infoWindow = new google.maps.InfoWindow({
-        content: '<div style="color:black;"><strong>Salón Jardines del Sol</strong><br>Cruz del Olvido S/N<br>San Pablo, Chimalhuacán, Méx.</div>'
-      });
-
-      marker.addListener('click', () => {
-        infoWindow.open(map, marker);
-      });
-    }
-
-    // Cargar el mapa cuando la página esté lista
-    window.addEventListener('load', initMap);
-
-    // FUNCIÓN MÚSICA
-    function playMusic() {
-      const audio = document.getElementById("music");
-      if (audio.paused) {
-        audio.play();
+    // AUDIO PLAY / PAUSE con icono
+    const audio = document.getElementById('music');
+    const playBtn = document.getElementById('playBtn');
+    function playMusic(){
+      if(audio.paused){
+        audio.play().catch(()=>{/* auto-play puede bloquearse en algunos navegadores */});
+        playBtn.textContent = '⏸';
       } else {
         audio.pause();
+        playBtn.textContent = '▶';
       }
     }
+    // Sincroniza icono si el usuario usa controles nativos del navegador
+    audio.addEventListener('pause', ()=> playBtn.textContent='▶');
+    audio.addEventListener('play', ()=> playBtn.textContent='⏸');
+
+    // Smooth scroll para anclas
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        const target = document.querySelector(a.getAttribute('href'));
+        if(target){
+          e.preventDefault();
+          target.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      })
+    });
   </script>
 </body>
 </html>
