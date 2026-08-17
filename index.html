@@ -227,16 +227,16 @@
         <h2 style="font-family: 'Playfair Display', serif;">Fotos</h2>
         <div class="gallery-grid">
           <a class="gallery-item" href="BODA/Boda1.jpeg">
-            <img src="BODA/photo1.jpg" alt="Foto 1" loading="lazy" width="800" height="600">
+            <img src="BODA/Boda1.jpeg" alt="Foto 1" loading="lazy" width="800" height="600">
           </a>
           <a class="gallery-item" href="BODA/Boda2.jpeg">
-            <img src="BODA/photo2.jpg" alt="Foto 2" loading="lazy" width="800" height="600">
+            <img src="BODA/Boda2.jpeg" alt="Foto 2" loading="lazy" width="800" height="600">
           </a>
           <a class="gallery-item" href="BODA/Boda3.jpeg">
-            <img src="BODA/photo3.jpg" alt="Foto 3" loading="lazy" width="800" height="600">
+            <img src="BODA/Boda3.jpeg" alt="Foto 3" loading="lazy" width="800" height="600">
           </a>
           <a class="gallery-item" href="BODA/Boda0.jpeg">
-            <img src="BODA/photo4.jpg" alt="Foto 4" loading="lazy" width="800" height="600">
+            <img src="BODA/Boda0.jpeg" alt="Foto 4" loading="lazy" width="800" height="600">
           </a>
         </div>
       </div>
@@ -256,33 +256,32 @@
   </footer>
 
   <!-- LLAMADA A LA API DE IFRAME DE YOUTUBE -->
-  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="https://youtube.com"></script>
 
   <script>
     let player;
 
-    // Esta función se activa automáticamente al cargar la API de YouTube
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('yt-player', {
         height: '0',
         width: '0',
-        videoId: 'Fu9uBqqOxWk', // <--- REEMPLAZA ESTO CON EL ID DE TU VIDEO
+        videoId: 'Fu9uBqqOxWk',
         playerVars: {
           'autoplay': 0,
           'controls': 0,
           'loop': 1,
-          'playlist': 'Fu9uBqqOxWk' // Pone el mismo ID aquí para que repita en bucle
+          'playlist': 'Fu9uBqqOxWk'
         }
       });
     }
 
     function toggleYoutubeMusic() {
       const playBtn = document.getElementById('playBtn');
+      if (!player || typeof player.getPlayerState !== 'function') return;
       
-      // Obtiene el estado actual del reproductor de YouTube
       const playerState = player.getPlayerState();
 
-      if (playerState !== 1) { // 1 significa que está reproduciendo
+      if (playerState !== 1) {
         player.playVideo();
         playBtn.innerText = "⏸";
       } else {
