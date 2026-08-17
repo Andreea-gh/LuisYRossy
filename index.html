@@ -5,9 +5,9 @@
   <title>Nuestra Boda — Luis y Rossy</title>
 
   <!-- Tipografías de Google Fonts corregidas -->
-  <link rel="preconnect" href="https://googleapis.com">
-  <link rel="preconnect" href="https://gstatic.com" crossorigin>
-  <link href="https://googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
@@ -231,7 +231,7 @@
       </div>
     </section>
 
-    <!-- GALERÍA DE FOTOS -->
+    <!-- GALERÍA DE FOTOS COMPLETADA -->
     <section id="galeria">
       <div class="section-inner">
         <h2 style="font-family: 'Playfair Display', serif;">Fotos</h2>
@@ -265,22 +265,20 @@
     <p>¡Te esperamos en nuestra boda!</p>
   </footer>
 
-  <!-- SISTEMA DE CONTROL DE AUDIO INTERNO CORREGIDO -->
+  <!-- PROGRAMACIÓN DE FUNCIONES (Sgripts que faltaban) -->
   <script>
     function openInvitation() {
       const overlay = document.getElementById('welcomeOverlay');
       const music = document.getElementById('music');
       const playBtn = document.getElementById('playBtn');
 
-      // Oculta la pantalla blanca
       if (overlay) {
         overlay.classList.add('hidden');
       }
       
-      // Reproduce el audio nativo de inmediato
       if (music) {
         music.play().catch(error => {
-          console.log("El navegador bloqueó el inicio automático:", error);
+          console.log("El navegador bloqueó la reproducción automática:", error);
         });
         if (playBtn) playBtn.innerText = "⏸";
       }
@@ -292,3 +290,11 @@
 
       if (!music) return;
 
+      if (music.paused) {
+        music.play().catch(error => {
+      console.log("Error al reproducir:", error);
+        });
+        playBtn.innerText = "⏸";
+      } else {
+        music.pause();
+        playBtn.innerText = "▶";}}
