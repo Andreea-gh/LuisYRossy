@@ -255,11 +255,12 @@
     <p>¡Te esperamos en nuestra boda!</p>
   </footer>
 
-  <!-- LLAMADA A LA API DE IFRAME DE YOUTUBE -->
+ <!-- LLAMADA A LA API DE IFRAME DE YOUTUBE -->
   <script src="https://youtube.com"></script>
 
   <script>
     let player;
+    let isPlayerReady = false; // Controla si YouTube ya cargó
 
     function onYouTubeIframeAPIReady() {
       player = new YT.Player('yt-player', {
@@ -271,17 +272,31 @@
           'controls': 0,
           'loop': 1,
           'playlist': 'Fu9uBqqOxWk'
+        },
+        events: {
+          'onReady': onPlayerReady
         }
       });
     }
 
+    // Se activa cuando el reproductor está 100% listo para sonar
+    function onPlayerReady(event) {
+      isPlayerReady = true;
+      console.log("¡YouTube está listo para reproducir!");
+    }
+
     function toggleYoutubeMusic() {
       const playBtn = document.getElementById('playBtn');
-      if (!player || typeof player.getPlayerState !== 'function') return;
+      
+      // PROTECCIÓN: Si el reproductor no ha cargado, avisa al usuario y no hace nada
+      if (!isPlayerReady || !player) {
+        alert("La música se está cargando, por favor intenta de nuevo en un segundo.");
+        return;
+      }
       
       const playerState = player.getPlayerState();
 
-      if (playerState !== 1) {
+      if (playerState !== 1) { // Si no está reproduciendo (1)
         player.playVideo();
         playBtn.innerText = "⏸";
       } else {
