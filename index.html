@@ -31,7 +31,7 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* === ESTILOS DE LA PANTALLA DE ENTRADA (ESTILO DIGITAL RSVP) === */
+    /* PANTALLA DE ENTRADA (ESTILO DIGITAL RSVP) */
     .welcome-overlay {
       position: fixed;
       inset: 0;
@@ -45,10 +45,11 @@
       padding: 20px;
       transition: opacity 0.6s ease, visibility 0.6s ease;
     }
-    /* Clase para desvanecer la pantalla al dar clic */
+    /* Esto hace que se desvanezca correctamente */
     .welcome-overlay.hidden {
       opacity: 0;
       visibility: hidden;
+      pointer-events: none;
     }
     .welcome-card {
       background: var(--card);
@@ -182,7 +183,7 @@
 </head>
 <body>
 
-  <!-- PANTALLA DE ENTRADA (Cubre la web inicial obligando al usuario a interactuar) -->
+  <!-- PANTALLA DE ENTRADA -->
   <div id="welcomeOverlay" class="welcome-overlay">
     <div class="welcome-card">
       <h2 class="welcome-title">Luis & Rossy</h2>
@@ -206,7 +207,7 @@
     </div>
 
     <!-- AUDIO PROPIO LOCAL -->
-    <audio id="music" src="cancionboda.mp3" loop preload="auto"></audio>
+    <audio id="music" src="cancion.mp3" loop preload="auto"></audio>
   </header>
 
   <main>
@@ -264,23 +265,30 @@
     <p>¡Te esperamos en nuestra boda!</p>
   </footer>
 
-  <!-- SISTEMA DE CONTROL DE AUDIO INTERNO -->
+  <!-- SISTEMA DE CONTROL DE AUDIO INTERNO CORREGIDO -->
   <script>
-    // Al presionar el botón de la portada, oculta el panel e inicia la canción automáticamente
     function openInvitation() {
       const overlay = document.getElementById('welcomeOverlay');
       const music = document.getElementById('music');
       const playBtn = document.getElementById('playBtn');
 
-      if (overlay) overlay.classList.add('hidden');
+      // Oculta la pantalla blanca
+      if (overlay) {
+        overlay.classList.add('hidden');
+      }
       
+      // Reproduce el audio nativo de inmediato
       if (music) {
         music.play().catch(error => {
-          console.log("El navegador impidió la reproducción automática:", error);
+          console.log("El navegador bloqueó el inicio automático:", error);
         });
         if (playBtn) playBtn.innerText = "⏸";
       }
     }
 
-    // Control manual por si el invitado decide silenciar la música después
     function toggleMusic() {
+      const music = document.getElementById('music');
+      const playBtn = document.getElementById('playBtn');
+
+      if (!music) return;
+
