@@ -179,6 +179,58 @@
 
     @media (max-width: 860px) { h1 { font-size: 3rem; } .hero-bg { background-position: top; } }
     @media (max-width: 520px) { h1 { font-size: 2.2rem; } .play-overlay { width: 64px; height: 64px; } }
+        /* SECCIÓN PADRES */
+    .parents-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      margin-top: 20px;
+    }
+    .parents-group {
+      background: var(--card);
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(33,33,33,0.06);
+    }
+    .parents-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--accent);
+      margin-bottom: 15px;
+      font-style: italic;
+    }
+    .parents-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .parents-names {
+      text-align: left;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+    .parents-names div {
+      margin: 8px 0;
+    }
+    .parent-photo {
+      width: 110px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .heart-icon {
+      color: #ffb7b2;
+      font-size: 1.5rem;
+    }
+    .cross-icon {
+      font-size: 0.9rem;
+      color: #555;
+      margin-left: 5px;
+    }
+
   </style>
 </head>
 <body>
@@ -197,13 +249,6 @@
     <div class="hero-content">
       <h1>Luis & Rossy</h1>
       <div class="subtitle">24 de Octubre, 2026</div>
-
-      <div class="hero-cta">
-        <a class="btn" href="#detalles">Ver detalles</a>
-        <button class="btn btn-ghost" onclick="toggleMusic()">
-          <span class="play-overlay" id="playBtn">⏸</span>
-        </button>
-      </div>
     </div>
 
     <!-- AUDIO PROPIO LOCAL -->
@@ -227,6 +272,44 @@
             <strong>📍 Salón Themis</strong>
             <div>Próximamente más información...</div>
           </div>
+        </div>
+      </div>
+    </section>
+    <!-- SECCIÓN PADRES -->
+    <section id="padres">
+      <div class="section-inner">
+        <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 4px;">Con la bendición de Dios y nuestros padres</h2>
+        
+        <div class="parents-grid">
+          
+          <!-- PADRES DE LA NOVIA -->
+          <div class="parents-group">
+            <div class="parents-title">Padres de la novia</div>
+            <div class="parents-row">
+              <div class="parents-names">
+                <div>Adelfo Hernández</div>
+                <div class="heart-icon">❤️</div>
+                <div>Constanza Mendiola <span class="cross-icon">✝</span></div>
+              </div>
+              <!-- Reemplaza 'BODA/novia_cadaver.png' por la ruta real de tu imagen -->
+              <img class="parent-photo" src="BODA/novia_cadaver.png" alt="Emily">
+            </div>
+          </div>
+
+          <!-- PADRES DEL NOVIO -->
+          <div class="parents-group">
+            <div class="parents-title">Padres del novio</div>
+            <div class="parents-row">
+              <!-- Reemplaza 'BODA/novio_victor.png' por la ruta real de tu imagen -->
+              <img class="parent-photo" src="BODA/novio_victor.png" alt="Victor">
+              <div class="parents-names">
+                <div>Herminio Herrera <span class="cross-icon">✝</span></div>
+                <div class="heart-icon">❤️</div>
+                <div>Maria Magdalena Ramirez</div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
