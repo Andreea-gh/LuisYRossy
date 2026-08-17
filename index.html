@@ -5,7 +5,7 @@
   <title>Nuestra Boda — Luis y Rossy</title>
 
   <!-- Tipografías similares a Canva -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://googleapis.com" rel="stylesheet">
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
@@ -202,13 +202,18 @@
     <div class="hero-content">
       <h1>Luis & Rossy</h1>
       <div class="subtitle">24 de Octubre, 2026 · Salón Jardines del Sol · 7:30 PM</div>
+
       <div class="hero-cta">
         <a class="btn" href="#detalles">Ver detalles</a>
-        <button class="btn btn-ghost" onclick="document.getElementById('music').paused ? playMusic() : playMusic()">
+        <!-- BOTÓN DE MÚSICA CONFIGURADO -->
+        <button class="btn btn-ghost" onclick="toggleMusic()">
           <span class="play-overlay" id="playBtn">▶</span>
         </button>
       </div>
     </div>
+
+    <!-- REPRODUCTOR OCULTO: Modifica 'TU_CANCION.mp3' por el archivo que tengas en tu carpeta -->
+    <audio id="music" src="BODA/TU_CANCION.mp3" loop></audio>
   </header>
 
   <main>
@@ -226,13 +231,13 @@
           </div>
           <div class="card">
             <strong>📍 Salón Themis</strong>
-            <div>Información pendiente...</div>
+            <div>Próximamente más información...</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- LA GALERÍA AHORA ESTÁ EN SU LUGAR CORRECTO EN EL HTML -->
+    <!-- GALERÍA DE FOTOS -->
     <section id="galeria">
       <div class="section-inner">
         <h2 style="font-family: 'Playfair Display', serif;">Fotos</h2>
@@ -252,7 +257,7 @@
         </div>
       </div>
 
-      <!-- Lightbox / modal -->
+      <!-- Lightbox / modal para ampliar las fotos -->
       <div id="lightbox" class="lightbox" aria-hidden="true">
         <button class="lb-close" aria-label="Cerrar">✕</button>
         <img class="lb-img" src="" alt="">
@@ -260,12 +265,29 @@
         <button class="lb-next" aria-label="Siguiente">▶</button>
       </div>
     </section>
-
   </main>
 
   <footer>
     <p>¡Te esperamos en nuestra boda!</p>
   </footer>
+
+  <!-- SCRIPT PARA CONTROLAR EL AUDIO -->
+  <script>
+    function toggleMusic() {
+      const music = document.getElementById('music');
+      const playBtn = document.getElementById('playBtn');
+
+      if (music.paused) {
+        music.play().catch(error => {
+          console.log("El navegador bloqueó la reproducción automática: ", error);
+        });
+        playBtn.innerText = "⏸";
+      } else {
+        music.pause();
+        playBtn.innerText = "▶";
+      }
+    }
+  </script>
 
 </body>
 </html>
