@@ -214,12 +214,13 @@
     .parents-names div {
       margin: 8px 0;
     }
-    .parent-photo {
-      width: 110px;
-      height: 150px;
-      object-fit: cover;
+   .parent-photo {
+      width: 120px;
+      height: auto;          /* Cambia altura fija por automática para no cortar */
+      object-fit: contain;   /* Fuerza al navegador a mostrar todo el dibujo */
       border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+      background-color: #fff; /* Fondo limpio por si el tamaño varía */
     }
     .heart-icon {
       color: #ffb7b2;
