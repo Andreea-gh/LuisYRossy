@@ -284,6 +284,7 @@
       }
     }
 
+    // Función para pausar o reproducir la música manualmente con el botón flotante
     function toggleMusic() {
       const music = document.getElementById('music');
       const playBtn = document.getElementById('playBtn');
@@ -292,9 +293,15 @@
 
       if (music.paused) {
         music.play().catch(error => {
-      console.log("Error al reproducir:", error);
+          console.log("Error al reproducir:", error);
         });
         playBtn.innerText = "⏸";
       } else {
         music.pause();
-        playBtn.innerText = "▶";}}
+        playBtn.innerText = "▶";
+      }
+    }
+  </script>
+
+</body>
+</html>
