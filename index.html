@@ -10,196 +10,198 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
   <style>
-    :root{
-      --bg:#fbf7f5;
-      --accent:#d6336c;
-      --muted:#7b6f6b;
-      --card:#ffffff;
+    :root {
+      --bg: #fbf7f5;
+      --accent: #d6336c;
+      --muted: #7b6f6b;
+      --card: #ffffff;
       --hero-overlay: rgba(16,12,10,0.45);
-      --max-width:1100px;
-     /* GALERÍA */
-.gallery-grid{
-  display:grid;
-  grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
-  gap:12px;
-  margin-top:18px;
-}
-.gallery-item{display:block;border-radius:10px;overflow:hidden;box-shadow:0 8px 18px rgba(0,0,0,0.08)}
-.gallery-item img{width:100%;height:140px;object-fit:cover;display:block;transition:transform .18s ease}
-.gallery-item:hover img{transform:scale(1.03)}
-
-/* LIGHTBOX */
-.lightbox{
-  position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.8);z-index:9999;padding:20px;
-}
-.lightbox[aria-hidden="false"]{display:flex}
-.lb-img{max-width:calc(100% - 120px);max-height:80vh;border-radius:8px;box-shadow:0 12px 40px rgba(0,0,0,0.6)}
-.lb-close,.lb-prev,.lb-next{
-  position:fixed;background:transparent;border:0;color:white;font-size:1.6rem;cursor:pointer;padding:8px;
-}
-.lb-close{top:18px;right:22px}
-.lb-prev{left:18px;top:50%;transform:translateY(-50%)}
-.lb-next{right:18px;top:50%;transform:translateY(-50%)} 
+      --max-width: 1100px;
     }
 
-    *{box-sizing:border-box}
-    body{
-      margin:0;
+    /* GALERÍA */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .gallery-item {
+      display: block;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      display: block;
+      transition: transform .18s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.03);
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.8);
+      z-index: 9999;
+      padding: 20px;
+    }
+    .lightbox[aria-hidden="false"] {
+      display: flex;
+    }
+    .lb-img {
+      max-width: calc(100% - 120px);
+      max-height: 80vh;
+      border-radius: 8px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+    }
+    .lb-close, .lb-prev, .lb-next {
+      position: fixed;
+      background: transparent;
+      border: 0;
+      color: white;
+      font-size: 1.6rem;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .lb-close { top: 18px; right: 22px; }
+    .lb-prev { left: 18px; top: 50%; transform: translateY(-50%); }
+    .lb-next { right: 18px; top: 50%; transform: translateY(-50%); } 
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
       font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
-      background:var(--bg);
-      color:#2b2b2b;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+      background: var(--bg);
+      color: #2b2b2b;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    main{max-width:var(--max-width);margin:0 auto;padding:0 20px;}
+    main { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }
 
     /* HERO */
-    header{
-      position:relative;
-      height:78vh;
-      min-height:520px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      color:white;
-      overflow:hidden;
-      border-bottom-left-radius:24px;
-      border-bottom-right-radius:24px;
-      margin-bottom:30px;
+    header {
+      position: relative;
+      height: 78vh;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      margin-bottom: 30px;
     }
-    header::before{
-      content:"";
-      position:absolute;inset:0;
+    header::before {
+      content: "";
+      position: absolute; inset: 0;
       background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.25));
-      z-index:1;
+      z-index: 1;
     }
-    .hero-bg{
-      position:absolute;inset:0;background-position:center;background-size:cover;z-index:0;filter:contrast(0.95) saturate(1.05);
-      transform:scale(1.02);
+    .hero-bg {
+      position: absolute; inset: 0; background-position: center; background-size: cover; z-index: 0; filter: contrast(0.95) saturate(1.05);
+      transform: scale(1.02);
     }
 
-    .hero-content{position:relative;z-index:2;max-width:900px;padding:40px;}
-    h1{
-      margin:0;
+    .hero-content { position: relative; z-index: 2; max-width: 900px; padding: 40px; }
+    h1 {
+      margin: 0;
       font-family: 'Playfair Display', serif;
-      font-weight:700;
-      font-size:4.2rem;
-      letter-spacing:0.02em;
-      line-height:1;
+      font-weight: 700;
+      font-size: 4.2rem;
+      letter-spacing: 0.02em;
+      line-height: 1;
       text-shadow: 0 6px 18px rgba(0,0,0,0.35);
     }
-    .subtitle{
-      margin-top:12px;
-      font-size:1.25rem;
-      color:rgba(255,255,255,0.95);
+    .subtitle {
+      margin-top: 12px;
+      font-size: 1.25rem;
+      color: rgba(255,255,255,0.95);
       text-shadow: 0 4px 12px rgba(0,0,0,0.25);
     }
 
-    .hero-cta{
-      margin-top:28px;
-      display:flex;
-      gap:16px;
-      justify-content:center;
-      flex-wrap:wrap;
+    .hero-cta {
+      margin-top: 28px;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
     }
-    .btn{
-      background:var(--card);
-      color:var(--accent);
-      padding:12px 20px;
-      border-radius:999px;
-      font-weight:600;
-      box-shadow:0 8px 20px rgba(0,0,0,0.12);
-      border:0;
-      cursor:pointer;
-      transition:transform .18s ease, box-shadow .18s ease;
-      text-decoration:none;
+    .btn {
+      background: var(--card);
+      color: var(--accent);
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      border: 0;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease;
+      text-decoration: none;
     }
-    .btn:active{transform:translateY(1px)}
-    .btn-ghost{background:transparent;border:2px solid rgba(255,255,255,0.18);color:white}
-    .play-overlay{
-      width:72px;height:72px;border-radius:50%;background:white;color:var(--accent);display:inline-grid;place-items:center;font-size:1.6rem;
-      box-shadow:0 8px 20px rgba(0,0,0,0.2);cursor:pointer;border:0;
+    .btn:active { transform: translateY(1px); }
+    .btn-ghost { background: transparent; border: 2px solid rgba(255,255,255,0.18); color: white; }
+    .play-overlay {
+      width: 72px; height: 72px; border-radius: 50%; background: white; color: var(--accent); display: inline-grid; place-items: center; font-size: 1.6rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2); cursor: pointer; border: 0;
     }
 
     /* SECCIONES */
-    section{padding:36px 0;}
-    .section-inner{max-width:900px;margin:0 auto;text-align:center;padding:0 16px;}
+    section { padding: 36px 0; }
+    .section-inner { max-width: 900px; margin: 0 auto; text-align: center; padding: 0 16px; }
 
-    .event-cards{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:18px;}
-    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow: 0 8px 20px rgba(33,33,33,0.06);min-width:220px;}
+    .event-cards { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; margin-top: 18px; }
+    .card { background: var(--card); padding: 18px; border-radius: 12px; box-shadow: 0 8px 20px rgba(33,33,33,0.06); min-width: 220px; }
 
     /* COUNTDOWN */
-    .countdown-box{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:20px;}
-    .countdown-item{
-      background:linear-gradient(180deg,#fff,#fff);
-      padding:14px 20px;border-radius:12px;min-width:110px;
-      box-shadow:0 8px 20px rgba(0,0,0,0.06);
+    .countdown-box { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+    .countdown-item {
+      background: linear-gradient(180deg,#fff,#fff);
+      padding: 14px 20px; border-radius: 12px; min-width: 110px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
     }
-    .countdown-item h3{margin:0;font-size:1.8rem;color:var(--accent);font-family:'Playfair Display',serif}
-    .countdown-item p{margin:6px 0 0 0;color:var(--muted);font-size:.9rem}
+    .countdown-item h3 { margin: 0; font-size: 1.8rem; color: var(--accent); font-family: 'Playfair Display', serif; }
+    .countdown-item p { margin: 6px 0 0 0; color: var(--muted); font-size: .9rem; }
 
     /* MAP */
-    #map{width:100%;height:420px;border-radius:12px;border:0;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.08)}
-    .map-info{background:#fff;padding:18px;border-radius:12px;max-width:720px;margin:18px auto;box-shadow:0 8px 20px rgba(0,0,0,0.05);text-align:left}
+    #map { width: 100%; height: 420px; border-radius: 12px; border: 0; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    .map-info { background: #fff; padding: 18px; border-radius: 12px; max-width: 720px; margin: 18px auto; box-shadow: 0 8px 20px rgba(0,0,0,0.05); text-align: left; }
 
     /* RSVP */
-    .rsvp{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:12px}
-    .mailto{color:var(--accent);font-weight:600;text-decoration:none}
-<!-- GALERÍA: insertar justo antes de <footer> -->
-<section id="galeria">
-  <div class="section-inner">
-    <h2 style="font-family:'Playfair Display',serif">Fotos</h2>
+    .rsvp { display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+    .mailto { color: var(--accent); font-weight: 600; text-decoration: none; }
 
-    <div class="gallery-grid">
-      <!-- Copia/pega un bloque <a> por cada foto y cambia la ruta/alt -->
-      <a class="gallery-item" href="BODA/Boda1.jpeg">
-        <img src="BODA/photo1.jpg" alt="Foto 1 - descripción" loading="lazy" width="800" height="600">
-      </a>
-      <a class="gallery-item" href="BODA/Boda2.jpeg">
-        <img src="BODA/photo2.jpg" alt="Foto 2 - descripción" loading="lazy" width="800" height="600">
-      </a>
-      <a class="gallery-item" href="BODA/Boda3.jpeg">
-        <img src="BODA/photo3.jpg" alt="Foto 3 - descripción" loading="lazy" width="800" height="600">
-      </a>
-      <a class="gallery-item" href="BODA/Boda0.jpeg">
-        <img src="BODA/photo4.jpg" alt="Foto 4 - descripción" loading="lazy" width="800" height="600">
-      </a>
-    </div>
-  </div>
-
-  <!-- Lightbox / modal -->
-  <div id="lightbox" class="lightbox" aria-hidden="true">
-    <button class="lb-close" aria-label="Cerrar">✕</button>
-    <img class="lb-img" src="" alt="">
-    <button class="lb-prev" aria-label="Anterior">◀</button>
-    <button class="lb-next" aria-label="Siguiente">▶</button>
-  </div>
-</section>
-    footer{background:var(--accent);color:white;padding:18px;text-align:center;border-radius:12px;margin:26px auto 60px;max-width:var(--max-width);}
+    footer { background: var(--accent); color: white; padding: 18px; text-align: center; border-radius: 12px; margin: 26px auto 60px; max-width: var(--max-width); }
 
     /* Responsive */
-    @media (max-width:860px){
-      h1{font-size:3rem}
-      .hero-bg{background-position:top}
+    @media (max-width: 860px) {
+      h1 { font-size: 3rem; }
+      .hero-bg { background-position: top; }
     }
-    @media (max-width:520px){
-      h1{font-size:2.2rem}
-      .play-overlay{width:64px;height:64px}
+    @media (max-width: 520px) {
+      h1 { font-size: 2.2rem; }
+      .play-overlay { width: 64px; height: 64px; }
     }
-
   </style>
 </head>
 <body>
-  <header>
-    <!-- Reemplaza esta URL por la imagen que exportes de Canva o usa Unsplash -->
-    <div class="hero-bg" style="background-image:url('BODA/Boda0.jpeg');"></div>
 
+  <header>
+    <div class="hero-bg" style="background-image: url('BODA/Boda0.jpeg');"></div>
     <div class="hero-content">
       <h1>Luis & Rossy</h1>
       <div class="subtitle">24 de Octubre, 2026 · Salón Jardines del Sol · 7:30 PM</div>
-
       <div class="hero-cta">
         <a class="btn" href="#detalles">Ver detalles</a>
         <button class="btn btn-ghost" onclick="document.getElementById('music').paused ? playMusic() : playMusic()">
@@ -212,172 +214,58 @@
   <main>
     <section id="detalles">
       <div class="section-inner">
-        <h2 style="font-family:'Playfair Display',serif;margin-bottom:6px">Detalles del Evento</h2>
+        <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 6px;">Detalles del Evento</h2>
         <div class="event-cards">
           <div class="card">
             <strong>📅 Fecha</strong>
             <div>24 de Octubre, 2026 · 7:30 PM</div>
           </div>
-           <div class="card">
+          <div class="card">
             <strong>📍 Misa</strong>
             <div>Catedral Jesús Señor de la misericordia<br>Av. Dr. Gustavo Baz 174, BenitoJuárez, 57000 Cdad. Nezahualcóyotl, Méx.<br> 5:30 pm</div>
           </div>
           <div class="card">
             <strong>📍 Salón Themis</strong>
-            <div>Salón Jardines del Sol<br>Cruz del Olvido S/N, San Pablo<br> 7:00</div>
-          </div>
-          <div class="card">
-            <strong>👗 Vestimenta</strong>
-            <div>Formal - Formal vaquero</div>
+            <div>Información pendiente...</div>
           </div>
         </div>
       </div>
     </section>
 
-    <section aria-label="Cuenta regresiva">
+    <!-- LA GALERÍA AHORA ESTÁ EN SU LUGAR CORRECTO EN EL HTML -->
+    <section id="galeria">
       <div class="section-inner">
-        <h2 style="font-family:'Playfair Display',serif">¡Faltan...</h2>
-        <div class="countdown-box" id="countdown">
-          <div class="countdown-item"><h3 id="days">0</h3><p>Días</p></div>
-          <div class="countdown-item"><h3 id="hours">0</h3><p>Horas</p></div>
-          <div class="countdown-item"><h3 id="minutes">0</h3><p>Minutos</p></div>
-          <div class="countdown-item"><h3 id="seconds">0</h3><p>Segundos</p></div>
+        <h2 style="font-family: 'Playfair Display', serif;">Fotos</h2>
+        <div class="gallery-grid">
+          <a class="gallery-item" href="BODA/Boda1.jpeg">
+            <img src="BODA/photo1.jpg" alt="Foto 1" loading="lazy" width="800" height="600">
+          </a>
+          <a class="gallery-item" href="BODA/Boda2.jpeg">
+            <img src="BODA/photo2.jpg" alt="Foto 2" loading="lazy" width="800" height="600">
+          </a>
+          <a class="gallery-item" href="BODA/Boda3.jpeg">
+            <img src="BODA/photo3.jpg" alt="Foto 3" loading="lazy" width="800" height="600">
+          </a>
+          <a class="gallery-item" href="BODA/Boda0.jpeg">
+            <img src="BODA/photo4.jpg" alt="Foto 4" loading="lazy" width="800" height="600">
+          </a>
         </div>
+      </div>
+
+      <!-- Lightbox / modal -->
+      <div id="lightbox" class="lightbox" aria-hidden="true">
+        <button class="lb-close" aria-label="Cerrar">✕</button>
+        <img class="lb-img" src="" alt="">
+        <button class="lb-prev" aria-label="Anterior">◀</button>
+        <button class="lb-next" aria-label="Siguiente">▶</button>
       </div>
     </section>
 
-    <section id="mapa">
-      <div class="section-inner">
-        <h2 style="font-family:'Playfair Display',serif">¿Cómo llegar?</h2>
-
-        <!-- Embed de Google Maps sin usar API Key. Cambia las coordenadas si quieres -->
-        <div id="map">
-          <iframe
-            src="https://maps.google.com/maps?q=19.3925,-99.0702&z=15&output=embed"
-            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-        </div>
-
-        <div class="map-info">
-          <p><strong>Catedral Jesús Señor de la Misericordia</strong></p>
-          <p>Av. Dr. Gustavo Baz 174, Benito Juárez, 57000 Cdad. Nezahualcóyotl, Méx</p>
-          <p><a class="mailto" href="https://maps.app.goo.gl/aVUXCok4H6YM32ebA" target="_blank">Abrir en Google Maps ↗</a></p>
-          <p><strong>Salón Jardines del Sol</strong></p>
-          <p>Cruz del Olvido S/N, San Pablo, 56334 Chimalhuacán, Méx.</p>
-          <p><a class="mailto" href="https://maps.app.goo.gl/K6w4VL4ZEzKchKdj9" target="_blank">Abrir en Google Maps ↗</a></p>
-        </div>
-      </div>
-    </section>
-
+  </main>
 
   <footer>
-    <p>Con amor, Luis y Rossy ❤️</p>
+    <p>¡Te esperamos en nuestra boda!</p>
   </footer>
 
-  <!-- Reproductor de audio controlado por botón -->
-  <audio id="music" preload="none">
-    <source src="ScreenRecording_08-16-2026_18-32-21_11.mp3" type="audio/mpeg">
-  </audio>
-
-  <script>
-    // COUNTDOWN
-    function updateCountdown() {
-      const weddingDate = new Date('October 24, 2026 19:30:00').getTime();
-      const now = Date.now();
-      let timeLeft = weddingDate - now;
-
-      if (timeLeft <= 0) {
-        document.getElementById('countdown').innerHTML = '<div style="font-family:Playfair Display,serif;font-size:1.6rem;color:var(--accent)">¡Ya es hora!</div>';
-        clearInterval(intervalId);
-        return;
-      }
-
-      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-      document.getElementById('days').textContent = days;
-      document.getElementById('hours').textContent = String(hours).padStart(2,'0');
-      document.getElementById('minutes').textContent = String(minutes).padStart(2,'0');
-      document.getElementById('seconds').textContent = String(seconds).padStart(2,'0');
-    }
-    updateCountdown();
-    const intervalId = setInterval(updateCountdown, 1000);
-
-    // AUDIO PLAY / PAUSE con icono
-    const audio = document.getElementById('music');
-    const playBtn = document.getElementById('playBtn');
-    function playMusic(){
-      if(audio.paused){
-        audio.play().catch(()=>{/* auto-play puede bloquearse en algunos navegadores */});
-        playBtn.textContent = '⏸';
-      } else {
-        audio.pause();
-        playBtn.textContent = '▶';
-      }
-    }
-    // Sincroniza icono si el usuario usa controles nativos del navegador
-    audio.addEventListener('pause', ()=> playBtn.textContent='▶');
-    audio.addEventListener('play', ()=> playBtn.textContent='⏸');
-
-    // Smooth scroll para anclas
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        const target = document.querySelector(a.getAttribute('href'));
-        if(target){
-          e.preventDefault();
-          target.scrollIntoView({behavior:'smooth',block:'start'});
-        }
-      })
-    });
-  </script>
-    <script>
-  (function(){
-    const items = Array.from(document.querySelectorAll('.gallery-item'));
-    const lightbox = document.getElementById('lightbox');
-    const lbImg = lightbox.querySelector('.lb-img');
-    const closeBtn = lightbox.querySelector('.lb-close');
-    const prevBtn = lightbox.querySelector('.lb-prev');
-    const nextBtn = lightbox.querySelector('.lb-next');
-
-    let currentIndex = -1;
-    function show(index){
-      const a = items[index];
-      if(!a) return;
-      lbImg.src = a.href;
-      lbImg.alt = a.querySelector('img').alt || '';
-      lightbox.setAttribute('aria-hidden','false');
-      currentIndex = index;
-    }
-    function hide(){
-      lightbox.setAttribute('aria-hidden','true');
-      lbImg.src = '';
-      currentIndex = -1;
-    }
-
-    items.forEach((a,i)=>{
-      a.addEventListener('click', (e)=>{
-        e.preventDefault();
-        show(i);
-      });
-    });
-
-    closeBtn.addEventListener('click', hide);
-    lightbox.addEventListener('click', (e)=>{
-      if(e.target === lightbox) hide();
-    });
-
-    prevBtn.addEventListener('click', ()=> show((currentIndex - 1 + items.length) % items.length));
-    nextBtn.addEventListener('click', ()=> show((currentIndex + 1) % items.length));
-
-    document.addEventListener('keydown', (e)=>{
-      if(lightbox.getAttribute('aria-hidden') === 'false'){
-        if(e.key === 'Escape') hide();
-        if(e.key === 'ArrowLeft') prevBtn.click();
-        if(e.key === 'ArrowRight') nextBtn.click();
-      }
-    });
-  })();
-</script>
 </body>
 </html>
