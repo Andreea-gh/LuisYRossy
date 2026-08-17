@@ -230,7 +230,36 @@
       color: #555;
       margin-left: 5px;
     }
-
+  /* ESTILOS DE LA SECCIÓN DE UBICACIÓN Y MISA */
+    .location-card-img {
+      width: 100%;
+      max-width: 380px;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .misa-address {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: #2b2b2b;
+      margin: 15px 0;
+      line-height: 1.5;
+    }
+    .btn-mapa {
+      background-color: #c93b3b; /* Color rojo del botón de tu imagen */
+      color: white !important;
+      padding: 10px 35px;
+      font-weight: bold;
+      text-decoration: underline;
+      border-radius: 12px;
+      border: 0;
+      display: inline-block;
+      margin-top: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -273,13 +302,42 @@
             <strong>📅 Fecha</strong>
             <div>24 de Octubre, 2026 · 7:30 PM</div>
           </div>
-          <div class="card">
-            <strong>📍 Misa</strong>
-            <div>Catedral Jesús Señor de la misericordia<br>Av. Dr. Gustavo Baz 174, BenitoJuárez, 57000 Cdad. Nezahualcóyotl, Méx.<br> 5:30 pm</div>
+         <div class="card" style="max-width: 420px; margin: 0 auto;">
+            <strong style="font-size: 1.3rem; display: block; margin-bottom: 12px;">📍 Misa</strong>
+            
+            <!-- Foto de la catedral (Guarda tu foto como 'catedral.jpeg' en la carpeta BODA) -->
+            <img class="location-card-img" src="BODA/catedral.jpeg" alt="Catedral Jesús Señor de la Misericordia">
+            
+            <!-- Dirección con fuente elegante cursiva/Playfair -->
+            <div class="misa-address">
+              Av. Dr. Gustavo Baz 174, Benito Juárez, 57000 Cdad. Nezahualcóyotl, Méx.
+            </div>
+            
+            <div style="margin-bottom: 15px; font-weight: 600; color: var(--accent);">5:30 PM</div>
+            
+            <!-- Botón que abre Google Maps directamente en la ubicación exacta -->
+            <a class="btn-mapa" href="https://maps.app.goo.gl/4WL7yo5Ty5pnG6Pc6" target="_blank">Ver mapa</a>
           </div>
-          <div class="card">
-            <strong>📍 Salón Themis</strong>
-            <div>Cruz del Olvido S/N, San Pablo, 56334 Chimalhuacán, Méx.<br> 7:00 pm</div>
+          <!-- TARJETA DE SALÓN REPARADA -->
+          <div class="card" style="max-width: 420px; margin: 0 auto;">
+            <strong style="font-size: 1.3rem; display: block; margin-bottom: 12px;">📍 Jardín Themis</strong>
+            
+            <!-- Foto del Jardín (Guarda tu imagen como 'salon.jpeg' en la carpeta BODA) -->
+            <img class="location-card-img" src="BODA/salon.jpeg" alt="Jardín Themis">
+            
+            <!-- Frase y dirección con fuente cursiva/Playfair -->
+            <div class="misa-address" style="font-size: 1.15rem;">
+              Te esperamos en el Jardín Themis para disfrutar este gran día
+            </div>
+            
+            <div style="margin-bottom: 15px; font-weight: 600; color: var(--accent);">7:30 PM</div>
+            
+            <div style="font-size: 0.95rem; color: var(--muted); margin-bottom: 15px; line-height: 1.4;">
+              Cruz del Olvido S/N, San Pablo, 56334 Chimalhuacán, Méx.
+            </div>
+            
+            <!-- Botón que abre Google Maps directamente en el Jardín Themis -->
+            <a class="btn-mapa" href="https://maps.app.goo.gl/MdJankM3ErYzzZge8" target="_blank">Ver mapa</a>
           </div>
         </div>
       </div>
