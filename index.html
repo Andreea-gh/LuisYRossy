@@ -1,212 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Nuestra Boda — Luis y Rossy</title>
-
-  <!-- Tipografías de Google Fonts corregidas -->
-  <link rel="preconnect" href="https://googleapis.com">
-  <link rel="preconnect" href="https://gstatic.com" crossorigin>
-  <link href="https://googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <style>
-    :root {
-      --bg: #fbf7f5;
-      --accent: #d6336c;
-      --muted: #7b6f6b;
-      --card: #ffffff;
-      --hero-overlay: rgba(16,12,10,0.45);
-      --max-width: 1100px;
-    }
-
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
-      background: var(--bg);
-      color: #2b2b2b;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    /* === ESTILOS DE LA PANTALLA DE ENTRADA (ESTILO DIGITAL RSVP) === */
-    .welcome-overlay {
-      position: fixed;
-      inset: 0;
-      background: var(--bg);
-      z-index: 10000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px;
-      transition: opacity 0.6s ease, visibility 0.6s ease;
-    }
-    /* Clase para desvanecer la pantalla al dar clic */
-    .welcome-overlay.hidden {
-      opacity: 0;
-      visibility: hidden;
-    }
-    .welcome-card {
-      background: var(--card);
-      padding: 40px 30px;
-      border-radius: 20px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-      max-width: 450px;
-      width: 100%;
-    }
-    .welcome-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      color: #2b2b2b;
-      margin: 0 0 10px 0;
-    }
-    .welcome-text {
-      color: var(--muted);
-      font-size: 1rem;
-      margin-bottom: 25px;
-    }
-
-    /* GALERÍA */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 12px;
-      margin-top: 18px;
-    }
-    .gallery-item {
-      display: block;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
-    }
-    .gallery-item img {
-      width: 100%;
-      height: 140px;
-      object-fit: cover;
-      display: block;
-      transition: transform .18s ease;
-    }
-    .gallery-item:hover img { transform: scale(1.03); }
-
-    /* LIGHTBOX */
-    .lightbox {
-      position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,0.8); z-index: 9999; padding: 20px;
-    }
-    .lightbox[aria-hidden="false"] { display: flex; }
-    .lb-img { max-width: calc(100% - 120px); max-height: 80vh; border-radius: 8px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); }
-    .lb-close, .lb-prev, .lb-next { position: fixed; background: transparent; border: 0; color: white; font-size: 1.6rem; cursor: pointer; padding: 8px; }
-    .lb-close { top: 18px; right: 22px; }
-    .lb-prev { left: 18px; top: 50%; transform: translateY(-50%); }
-    .lb-next { right: 18px; top: 50%; transform: translateY(-50%); } 
-
-    main { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }
-
-    /* HERO */
-    header {
-      position: relative;
-      height: 78vh;
-      min-height: 520px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: white;
-      overflow: hidden;
-      border-bottom-left-radius: 24px;
-      border-bottom-right-radius: 24px;
-      margin-bottom: 30px;
-    }
-    header::before {
-      content: "";
-      position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.25));
-      z-index: 1;
-    }
-    .hero-bg {
-      position: absolute; inset: 0; background-position: center; background-size: cover; z-index: 0; filter: contrast(0.95) saturate(1.05);
-      transform: scale(1.02);
-    }
-    .hero-content { position: relative; z-index: 2; max-width: 900px; padding: 40px; }
-    h1 {
-      margin: 0;
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 4.2rem;
-      letter-spacing: 0.02em;
-      line-height: 1;
-      text-shadow: 0 6px 18px rgba(0,0,0,0.35);
-    }
-    .subtitle {
-      margin-top: 12px;
-      font-size: 1.25rem;
-      color: rgba(255,255,255,0.95);
-      text-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    }
-    .hero-cta { margin-top: 28px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    
-    .btn {
-      background: var(--card);
-      color: var(--accent);
-      padding: 12px 28px;
-      border-radius: 999px;
-      font-weight: 600;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-      border: 0;
-      cursor: pointer;
-      transition: transform .18s ease, box-shadow .18s ease;
-      text-decoration: none;
-      display: inline-block;
-    }
-    .btn:active { transform: translateY(1px); }
-    .btn-ghost { background: transparent; border: 2px solid rgba(255,255,255,0.18); color: white; }
-    .play-overlay {
-      width: 72px; height: 72px; border-radius: 50%; background: white; color: var(--accent); display: inline-grid; place-items: center; font-size: 1.6rem;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2); cursor: pointer; border: 0;
-    }
-
-    /* SECCIONES */
-    section { padding: 36px 0; }
-    .section-inner { max-width: 900px; margin: 0 auto; text-align: center; padding: 0 16px; }
-    .event-cards { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; margin-top: 18px; }
-    .card { background: var(--card); padding: 18px; border-radius: 12px; box-shadow: 0 8px 20px rgba(33,33,33,0.06); min-width: 220px; }
-
-    footer { background: var(--accent); color: white; padding: 18px; text-align: center; border-radius: 12px; margin: 26px auto 60px; max-width: var(--max-width); }
-
-    @media (max-width: 860px) { h1 { font-size: 3rem; } .hero-bg { background-position: top; } }
-    @media (max-width: 520px) { h1 { font-size: 2.2rem; } .play-overlay { width: 64px; height: 64px; } }
-  </style>
-</head>
-<body>
-
-  <!-- PANTALLA DE ENTRADA (Cubre la web inicial obligando al usuario a interactuar) -->
-  <div id="welcomeOverlay" class="welcome-overlay">
-    <div class="welcome-card">
-      <h2 class="welcome-title">Luis & Rossy</h2>
-      <p class="welcome-text">¡Estás invitado a nuestra boda!</p>
-      <button class="btn" onclick="openInvitation()">Abrir Invitación ✨</button>
-    </div>
-  </div>
-
-  <header>
-    <div class="hero-bg" style="background-image: url('BODA/Boda0.jpeg');"></div>
-    <div class="hero-content">
-      <h1>Luis & Rossy</h1>
-      <div class="subtitle">24 de Octubre, 2026</div>
-
-      <div class="hero-cta">
-        <a class="btn" href="#detalles">Ver detalles</a>
-        <button class="btn btn-ghost" onclick="toggleMusic()">
-          <span class="play-overlay" id="playBtn">⏸</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- AUDIO PROPIO LOCAL -->
-    <audio id="music" src="cancion.mp3" loop preload="auto"></audio>
+  <audio id="music" src="cancion.mp3" loop preload="auto"></audio>
   </header>
 
   <main>
@@ -266,21 +58,23 @@
 
   <!-- SISTEMA DE CONTROL DE AUDIO INTERNO -->
   <script>
-    // Al presionar el botón de la portada, oculta el panel e inicia la canción automáticamente
-    function openInvitation() {
-      const overlay = document.getElementById('welcomeOverlay');
+    function toggleMusic() {
       const music = document.getElementById('music');
       const playBtn = document.getElementById('playBtn');
 
-      if (overlay) overlay.classList.add('hidden');
-      
-      if (music) {
+      if (!music) return;
+
+      if (music.paused) {
         music.play().catch(error => {
-          console.log("El navegador impidió la reproducción automática:", error);
+          console.log("El navegador requiere interacción previa:", error);
         });
-        if (playBtn) playBtn.innerText = "⏸";
+        playBtn.innerText = "⏸";
+      } else {
+        music.pause();
+        playBtn.innerText = "▶";
       }
     }
+  </script>
 
-    // Control manual por si el invitado decide silenciar la música después
-    function toggleMusic() {
+</body>
+</html>
