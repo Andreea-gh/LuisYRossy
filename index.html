@@ -260,6 +260,37 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.15);
       cursor: pointer;
     }
+     /* CONTADOR CUENTA REGRESIVA */
+    .countdown-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .countdown-block {
+      background: linear-gradient(180deg, #fff, #fefefe);
+      border: 1px solid rgba(214, 51, 108, 0.15);
+      border-radius: 8px;
+      padding: 10px;
+      min-width: 65px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    }
+    .countdown-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+      line-height: 1;
+    }
+    .countdown-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 4px;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -296,15 +327,37 @@
       <div class="section-inner">
         <h2 style="font-family: 'Playfair Display', serif; margin-bottom: 6px;">Detalles del Evento</h2>
         <div class="event-cards">
-          <div class="card">
-            <strong>📅 Fecha</strong>
-            <div>24 de Octubre, 2026 · 7:30 PM</div>
+         <div class="card" style="max-width: 420px; margin: 0 auto; flex: 1 1 100%;">
+            <strong style="font-size: 1.3rem; display: block; margin-bottom: 8px;">📅 Fecha</strong>
+            <div style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.25rem; color: #2b2b2b;">
+              Sábado, 24 de Octubre de 2026
+            </div>
+            
+            <!-- Bloques del reloj digital -->
+            <div class="countdown-container">
+              <div class="countdown-block">
+                <span class="countdown-number" id="days">00</span>
+                <span class="countdown-label">Días</span>
+              </div>
+              <div class="countdown-block">
+                <span class="countdown-number" id="hours">00</span>
+                <span class="countdown-label">Horas</span>
+              </div>
+              <div class="countdown-block">
+                <span class="countdown-number" id="minutes">00</span>
+                <span class="countdown-label">Min</span>
+              </div>
+              <div class="countdown-block">
+                <span class="countdown-number" id="seconds">00</span>
+                <span class="countdown-label">Seg</span>
+              </div>
+            </div>
           </div>
          <div class="card" style="max-width: 420px; margin: 0 auto;">
             <strong style="font-size: 1.3rem; display: block; margin-bottom: 12px;">📍 Misa</strong>
             
             <!-- Foto de la catedral (Guarda tu foto como 'catedral.jpeg' en la carpeta BODA) -->
-            <img class="location-card-img" src="BODA/catedral.jpeg" alt="Catedral Jesús Señor de la Misericordia">
+            <img class="location-card-img" src="BODA/misa.png" alt="Catedral Jesús Señor de la Misericordia">
             
             <!-- Dirección con fuente elegante cursiva/Playfair -->
             <div class="misa-address">
@@ -321,7 +374,7 @@
             <strong style="font-size: 1.3rem; display: block; margin-bottom: 12px;">📍 Jardín Themis</strong>
             
             <!-- Foto del Jardín (Guarda tu imagen como 'salon.jpeg' en la carpeta BODA) -->
-            <img class="location-card-img" src="BODA/salon.jpeg" alt="Jardín Themis">
+            <img class="location-card-img" src="BODA/salon.png" alt="Jardín Themis">
             
             <!-- Frase y dirección con fuente cursiva/Playfair -->
             <div class="misa-address" style="font-size: 1.15rem;">
