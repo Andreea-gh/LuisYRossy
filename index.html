@@ -594,7 +594,7 @@
         // Armamos el mensaje automático para WhatsApp
         if (btnRsvp) {
           const textoMensaje = encodeURIComponent("¡Hola Luis y Rossy! Confirmo nuestra asistencia bajo el nombre de " + nombreLimpio + " para los " + pases + " lugares reservados. ¡Ahí estaremos!");
-          btnRsvp.href = "https://wa.me" + tuTelefono + "?text=" + textoMensaje;
+          btnRsvp.href = "https://wa.me/" + tuTelefono + "?text=" + textoMensaje;
         }
       }
     }
